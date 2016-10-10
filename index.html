@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="UTF-8">
+	<title>The war on drugs</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="/js/libs/jquery.min.js"></script>
+	<script src="/js/libs/d3.v4.min.js"></script>
+	<script src="/js/libs/d3-geo.v1.min.js"></script>
+	<script src="/js/libs/d3-geo-projection.v1.min.js"></script>
+	<script src="/js/libs/d3-selection-multi.v0.4.min.js"></script>
+	<script src="/js/libs/d3-axis.v1.min.js"></script>
+	<script src="/js/libs/topojson.js"></script>
+	<script src="/js/libs/queue.min.js"></script>
+	<script src="/js/ant.js"></script>
+	<script src="/js/yesonfour.js"></script>
+	<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+	<div id="start">
+		<div class="header">
+			<h1>Marijuana<br/>Arrests<br/>Ruin<br/>Lives.</h1>
+		</div>
+		<div class="msg">
+			<div id="banner" class="box">
+				<h2>Say yes on 4!</h2>
+			</div>
+		</div>
+		<div class="action clear">
+			<div class="c2a" data-click data-parse="#toggle_start,#init">PLAY</div>
+		</div>
+	</div>
+	<div id="fixed">
+		<div id="map" data-chart="map" data-map_center_lat="42.330128" data-map_center_lon="-71.067549" data-zoom_level="100000"></div>
+	</div>
+	<!-- Blockgroups -->
+	<a id="zoom_to_boston" data-control_chart="map" data-zoom_to=".blockgroups > path"></a>
+	<a id="redraw_blockgroups" data-control_chart="map" data-add_layer="blockgroups" data-layer_key="stdin" data-parse="#zoom_to_boston"></a>
+	<a id="download_blockgroups" data-onload data-download="data/blockgroups.json" data-download_id="blockgroups" data-type="json" data-download_parse="#redraw_blockgroups"></a>	
+	
+	<!-- Grid -->
+	<a id="redraw_grid" data-control_chart="map" data-add_layer="grid" data-layer_key="stdin" data-parse="" data-layer_points></a>
+	<a id="download_grid" data-onload data-download="data/grid.json" data-download_id="grid" data-type="json" data-download_parse="#redraw_grid"></a>
+
+	<!-- Incidents -->
+	<a id="quantify_incidents" data-control_chart="map" data-quantify="grid" data-quantifier="incidents"></a>
+	<a id="download_incidents" data-onload data-download="data/incidents.csv" data-download_id="incidents" data-type="csv" data-download_parse="#redraw_incidents"></a>
+
+	<a id="init" data-parse="#quantify_incidents"></a>
+	<a id="toggle_start" data-control_element="#start" data-element_toggle></a>
+
+</body>
+</html>
