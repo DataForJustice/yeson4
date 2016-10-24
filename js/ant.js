@@ -436,6 +436,12 @@ Ant.prototype = {
 					var me = this;
 					$(data.download_parse).each (function () { me.parseElement.apply (me, [$(this) [0]]); });
 				}
+				if (data.download_parse_sequence) {
+					var me = this, x = data.download_parse_sequence.split (',');
+					for (var e in x) { 
+						$(x [e]).each (function () { me.parseElement.apply (me, [$(this) [0]], false);})
+					}
+				}
 			}, this));
 		}
 		/* data process */
