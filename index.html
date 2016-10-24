@@ -2,7 +2,7 @@
 <html lang="en-us">
 <head>
 	<meta charset="UTF-8">
-	<title>The war on drugs</title>
+	<title>Vote YES on 4!</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="/js/libs/jquery.min.js"></script>
 	<script src="/js/libs/d3.v4.min.js"></script>
@@ -17,36 +17,93 @@
 	<link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
+	<audio data-media="audio" id="narration" preload="auto" autobuffer>
+		<source src="narration.mp3" type="audio/mp3"></source>
+	</audio>
 	<div id="start">
 		<div class="header">
 			<h1>Marijuana<br/>Arrests<br/>Ruin<br/>Lives.</h1>
+			<h3>And they happen everyday in Boston.</h3>
 		</div>
 		<div class="msg">
 			<div id="banner" class="box">
-				<h2>Say yes on 4!</h2>
+				<div id="weekly" data-chart="lines"></div>
+				
 			</div>
 		</div>
 		<div class="action clear">
-			<div class="c2a" data-click data-parse="#toggle_start,#init">PLAY</div>
+			<div class="c2a" data-click data-parse="#toggle_start,#init">Learn more!</div>
 		</div>
 	</div>
 	<div id="fixed">
+		<div id="legend">
+			<div id="legend_grid">
+				<table>
+					<tr><th>Arrests:</th><td><span class="grid_arrests"></span></td></tr>
+				</table>
+				<div id="grid_arrests" data-chart="lines"></div>
+			</div>
+			<div id="legend_blockgroup">
+			</div>
+		</div>
 		<div id="map" data-chart="map" data-map_center_lat="42.330128" data-map_center_lon="-71.067549" data-zoom_level="100000"></div>
 	</div>
+	<div id="movie">
+		<div><a data-click data-parse="#set_white">white</a></div>	
+		<div><a data-click data-parse="#set_black">black</a></div>	
+		<div><a data-click data-parse="#set_poc">poc</a></div>	
+		<div><a data-click data-parse="#set_opoc">opoc</a></div>	
+		<div><a data-click data-parse="#quantify_incidents">all poss class d</a></div>	
+		<div>
+			<a data-click data-parse="#quantify_incidents_a">poss class d only</a>
+			[<a data-click data-parse="#quantify_incidents_a_abs">absolute</a>]
+		</div>	
+		<div>
+			<a data-click data-parse="#quantify_incidents_b">poss class d only intent mfr, etc</a>
+			[<a data-click data-parse="#quantify_incidents_b_abs">absolute</a>]
+			<br>
+
+			<a data-click data-parse="#redraw_circles">REDRAW CIRCLES</a>
+		</div>	
+	</div>
+	<!-- START CONTROLS -->
 	<!-- Blockgroups -->
 	<a id="zoom_to_boston" data-control_chart="map" data-zoom_to=".blockgroups > path"></a>
 	<a id="redraw_blockgroups" data-control_chart="map" data-add_layer="blockgroups" data-layer_key="stdin" data-parse="#zoom_to_boston"></a>
-	<a id="download_blockgroups" data-onload data-download="data/blockgroups.json" data-download_id="blockgroups" data-type="json" data-download_parse="#redraw_blockgroups"></a>	
+	<a id="download_blockgroups" data-onload data-download="data/blockgroups.json" data-download_id="blockgroups" data-type="json" data-download_parse_sequence="#redraw_blockgroups,#download_blockgroups_race,#download_grid" data-debug="download_blockgroups"></a>	
+	<a id="download_blockgroups_race" data-download="data/blockgroups.race.csv" data-download_id="blockgroups_race" data-download_parse_sequence="#quantify_blockgroups"></a>
+	<a id="quantify_blockgroups" data-control_chart="map" data-quantify="blockgroups" data-quantifier="blockgroups"></a>
 	
 	<!-- Grid -->
 	<a id="redraw_grid" data-control_chart="map" data-add_layer="grid" data-layer_key="stdin" data-parse="" data-layer_points></a>
-	<a id="download_grid" data-onload data-download="data/grid.json" data-download_id="grid" data-type="json" data-download_parse="#redraw_grid"></a>
+	<a id="download_grid" data-download="data/grid.json" data-download_id="grid" data-type="json" data-download_parse_sequence="#redraw_grid,#download_incidents"></a>
 
 	<!-- Incidents -->
 	<a id="quantify_incidents" data-control_chart="map" data-quantify="grid" data-quantifier="incidents"></a>
-	<a id="download_incidents" data-onload data-download="data/incidents.csv" data-download_id="incidents" data-type="csv" data-download_parse="#redraw_incidents"></a>
+	<a id="download_incidents" data-download="data/incidents.csv" data-download_id="incidents" data-type="csv" data-download_parse_sequence="#quantify_incidents"></a>
 
-	<a id="init" data-parse="#quantify_incidents"></a>
+	<!-- viz -->
+	<a id="reset_blockgroups" data-control_element=".blockgroup" data-element_remove_class="white black poc opoc"></a>
+	<a id="set_white" data-parse_first="#reset_blockgroups" data-control_element=".blockgroup" data-element_add_class="white"></a>
+	<a id="set_black" data-parse_first="#reset_blockgroups" data-control_element=".blockgroup" data-element_add_class="black"></a>
+	<a id="set_poc" data-parse_first="#reset_blockgroups" data-control_element=".blockgroup" data-element_add_class="poc"></a>
+	<a id="set_opoc" data-parse_first="#reset_blockgroups" data-control_element=".blockgroup" data-element_add_class="opoc"></a>
+
+	<!-- poss class d -->
+
+	<a id="quantify_incidents_a" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args='{"incidents": ["01845"]}'></a>
+	<a id="quantify_incidents_a_abs" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args='{"incidents": ["01845"], "absolute": true}'></a>
+
+	<!-- poss class d intent -->
+
+	<a id="quantify_incidents_b" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args='{"incidents": ["01848"]}'></a>
+	<a id="quantify_incidents_b_abs" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args='{"incidents": ["01848"], "absolute": true}'></a>
+	
+	<a id="redraw_circles" data-control_chart="map" data-quantify="grid" data-quantifier="redraw"></a>
+
+	<a id="show_legend_grid" data-control_element="#legend_grid" data-element_show></a>
+
+	<a id="init" data-parse=""></a>
 	<a id="toggle_start" data-control_element="#start" data-element_toggle></a>
 
 </body>

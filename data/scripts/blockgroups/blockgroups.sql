@@ -12,7 +12,7 @@ FROM
 		FROM
 			(SELECT
 				b.geoid as id,
-				b.wkb_geometry
+				ST_Intersection (p.wkb_geometry, b.wkb_geometry) as wkb_geometry
 			FROM 
 				blockgroups b,
 				place p
