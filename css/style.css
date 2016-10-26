@@ -8,6 +8,32 @@ h1, h2, h3, h4, h5, h6 {
 	margin: 0;
 	padding: 0;
 }
+#top {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 10%;
+	width: 100%;
+	background-color: white;
+}
+#aclum {
+	position: absolute;
+	top: 0;
+	left: 10%;
+	height: 100%;
+	width: 30%;
+	background: url('../img/logo.png') no-repeat;
+	background-size: contain;
+}
+#yesonfour {
+	position: relative;
+	top: 0;
+	left: 70%;
+	height: 100%;
+	width: 30%;
+	background: url('../img/yeson4.png') no-repeat;
+	background-size: contain;
+}
 @media all and (orientation: portrait) {
 	#start {
 		width: 80%;
@@ -39,7 +65,11 @@ h1, h2, h3, h4, h5, h6 {
 		top: 60%;
 		left: 0;
 		width: 100%;
+		max-width: 100%;
 		height: 40%;
+		font-size: 1.8em;
+		padding: 2%;
+		text-align: center;
 	}
 }
 @media all and (orientation: landscape) {
@@ -71,17 +101,21 @@ h1, h2, h3, h4, h5, h6 {
 	}
 	#caption {
 		position: fixed;
-		top: 0;
+		top: 30%;
 		left: 0;
-		height: 100%;
-		width: 50%;
+		height: 70%;
+		width: 40%;
+		font-size: 2em;
+		padding: 5%;
+		text-align: left;
 	}
 }
-#movie {
+#caption.big {
+	font-size: 3em;
 }
 #movie > div { 
 	position: relative;
-	height: 70vh;
+	height: 80vh;
 	width: 0px;
 }
 #legend { 
@@ -121,6 +155,10 @@ h1, h2, h3, h4, h5, h6 {
 	fill: none;
 	stroke: white;
 }
+.blockgroups.default > path {
+	fill: rgba(0,84,136,0.3);
+	stroke: white;
+}
 
 .grid circle { 
 	fill: rgba(206,18,86, 0.8);
@@ -131,12 +169,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .w_a.white { fill: #eff3ff; }
 .w_b.white { fill: #bdd7e7; }
-.w_c.white { fill: #6baed6; }
-.w_d.white { fill: #2171b5; }
+.w_c.white,.w_c.seg { fill: #6baed6; }
+.w_d.white,.w_d.seg { fill: #2171b5; }
 .p_a.poc { fill: #edf8e9; }
 .p_b.poc { fill: #bae4b3; }
-.p_c.poc { fill: #74c476; }
-.p_d.poc { fill: #238b45; }
+.p_c.poc,.p_c.seg { fill: #74c476; }
+.p_d.poc,.p_d.seg { fill: #238b45; }
 .b_a.black { fill: #f2f0f7; }
 .b_b.black { fill: #cbc9e2; }
 .b_c.black { fill: #9e9ac8; }

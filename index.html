@@ -26,27 +26,27 @@
 		<source src="narration.mp3" type="audio/mp3"></source>
 	</audio>
 	<div id="movie" data-movie data-trigger_position="0.7">
-		<div id="movie_1" data-parse="#text_1,#voice_1">hola</div>
-		<div id="movie_2" data-parse="#text_2,#voice_2"></div>
+		<div id="movie_1" data-parse="#text_1,#voice_1,#big_caption,#hide_grid,#empty_blockgroups"></div>
+		<div id="movie_2" data-parse="#text_2,#voice_2,#normal_caption"></div>
 		<div id="movie_3" data-parse="#text_3,#voice_3"></div>
 		<div id="movie_4" data-parse="#text_4,#voice_4"></div>
-		<div id="movie_5" data-parse="#text_5,#voice_5"></div>
-		<div id="movie_6" data-parse="#text_6,#voice_6,#toggle_map"></div>
-		<div id="movie_7" data-parse="#text_7,#voice_7">como estas</div>
-		<div id="movie_8" data-parse="#text_8,#voice_8"></div>
-		<div id="movie_9" data-parse="#text_9,#voice_9"></div>
-		<div id="movie_10" data-parse="#text_10,#voice_10"></div>
-		<div id="movie_11" data-parse="#text_11,#voice_11"></div>
-		<div id="movie_12" data-parse="#text_12,#voice_12"></div>
-		<div id="movie_13" data-parse="#text_13,#voice_13"></div>
-		<div id="movie_14" data-parse="#text_14,#voice_14"></div>
-		<div id="movie_15" data-parse="#text_15,#voice_15"></div>
+		<div id="movie_5" data-parse="#text_5,#voice_5,#empty_blockgroups"></div>
+		<div id="movie_6" data-parse="#text_6,#voice_6,#set_white"></div>
+		<div id="movie_7" data-parse="#text_7,#voice_7,#set_black"></div>
+		<div id="movie_8" data-parse="#text_8,#voice_8,#set_opoc"></div>
+		<div id="movie_9" data-parse="#text_9,#voice_9,#set_seg"></div>
+		<div id="movie_10" data-parse="#text_10,#voice_10,#set_white"></div>
+		<div id="movie_11" data-parse="#text_11,#voice_11,#set_poc"></div>
+		<div id="movie_12" data-parse="#text_12,#voice_12,#set_white"></div>
+		<div id="movie_13" data-parse="#text_13,#voice_13,#set_poc"></div>
+		<div id="movie_14" data-parse="#text_14,#voice_14,#set_seg"></div>
+		<div id="movie_15" data-parse="#text_15,#voice_15,#toggle_grid"></div>
 		<div id="movie_16" data-parse="#text_16,#voice_16"></div>
-		<div id="movie_17" data-parse="#text_17,#voice_17"></div>
-		<div id="movie_18" data-parse="#text_18,#voice_18"></div>
-		<div id="movie_19" data-parse="#text_19,#voice_19"></div>
-		<div id="movie_20" data-parse="#text_20,#voice_20"></div>
-		<div id="movie_21" data-parse="#text_21,#voice_21"></div>
+		<div id="movie_17" data-parse="#text_17,#voice_17,#set_seg"></div>
+		<div id="movie_18" data-parse="#text_18,#voice_18,#set_white"></div>
+		<div id="movie_19" data-parse="#text_19,#voice_19,#set_poc"></div>
+		<div id="movie_20" data-parse="#text_20,#voice_20,#set_white"></div>
+		<div id="movie_21" data-parse="#text_21,#voice_21,#set_poc"></div>
 		<div id="movie_22" data-parse="#text_22,#voice_22"></div>
 		<div id="movie_23" data-parse="#text_23,#voice_23"></div>
 	</div>
@@ -61,14 +61,21 @@
 			<div id="legend_blockgroup">
 			</div>
 		</div>
-		<div id="map" data-chart="map" data-map_center_lat="42.330128" data-map_center_lon="-71.067549" data-zoom_level="100000"></div>
+		<div class="chart" id="map" data-chart="map" data-map_center_lat="42.330128" data-map_center_lon="-71.067549" data-zoom_level="100000"></div>
 		<!-- 
 		<div id="weeks" data-chart="lines"></div>
 		<a id="toggle_map" data-control_element="#map" data-element_toggle></a>
 		<a id="toggle_weeks" data-control_element="#weeks" data-element_toggle></a>
 		-->
 	</div>
+	<div id="top">
+		<div id="aclum"></div>
+		<div id="yesonfour"></div>
+	</div>
 	<div id="caption"></div>
+	<!-- caption actions -->
+	<a id="big_caption" data-control_element="#caption" data-element_add_class="big" data-debug="hola"></a>
+	<a id="normal_caption" data-control_element="#caption" data-element_remove_class="big"></a>
 		<!-- 
 		<div><a data-click data-parse="#set_white">white</a></div>	
 		<div><a data-click data-parse="#set_black">black</a></div>	
@@ -89,6 +96,7 @@
 		-->
 	<!-- START CONTROLS -->
 	<!-- Blockgroups -->
+	<a id="empty_blockgroups" data-control_element=".blockgroups" data-element_add_class="default"></a>
 	<a id="zoom_to_boston" data-control_chart="map" data-zoom_to=".blockgroups > path"></a>
 	<a id="redraw_blockgroups" data-control_chart="map" data-add_layer="blockgroups" data-layer_key="stdin" data-parse="#zoom_to_boston"></a>
 	<a id="download_blockgroups" data-onload data-download="data/blockgroups.json" data-download_id="blockgroups" data-type="json" data-download_parse_sequence="#redraw_blockgroups,#download_blockgroups_race,#download_grid" data-debug="download_blockgroups"></a>	
@@ -98,17 +106,22 @@
 	<!-- Grid -->
 	<a id="redraw_grid" data-control_chart="map" data-add_layer="grid" data-layer_key="stdin" data-parse="" data-layer_points></a>
 	<a id="download_grid" data-download="data/grid.json" data-download_id="grid" data-type="json" data-download_parse_sequence="#redraw_grid,#download_incidents"></a>
+	<a id="hide_grid" data-control_element=".grid" data-element_hide></a>
+	<a id="show_grid" data-control_element=".grid" data-element_show></a>
+	<a id="toggle_grid" data-control_element=".grid" data-element_toggle></a>
 
 	<!-- Incidents -->
 	<a id="quantify_incidents" data-control_chart="map" data-quantify="grid" data-quantifier="incidents"></a>
 	<a id="download_incidents" data-download="data/incidents.csv" data-download_id="incidents" data-type="csv" data-download_parse_sequence="#quantify_incidents"></a>
 
 	<!-- viz -->
-	<a id="reset_blockgroups" data-control_element=".blockgroup" data-element_remove_class="white black poc opoc"></a>
+	<a id="reset_blockgroups" data-control_element=".blockgroup" data-element_remove_class="white black poc opoc seg" data-parse="#reset_blockgroups_layer"></a>
+	<a id="reset_blockgroups_layer" data-control_element=".blockgroups" data-element_remove_class="default white black poc opoc seg"></a>
 	<a id="set_white" data-parse_first="#reset_blockgroups" data-control_element=".blockgroup" data-element_add_class="white"></a>
 	<a id="set_black" data-parse_first="#reset_blockgroups" data-control_element=".blockgroup" data-element_add_class="black"></a>
 	<a id="set_poc" data-parse_first="#reset_blockgroups" data-control_element=".blockgroup" data-element_add_class="poc"></a>
 	<a id="set_opoc" data-parse_first="#reset_blockgroups" data-control_element=".blockgroup" data-element_add_class="opoc"></a>
+	<a id="set_seg" data-parse_first="#reset_blockgroups" data-control_element=".blockgroup" data-element_add_class="seg"></a>
 
 	<!-- poss class d -->
 
