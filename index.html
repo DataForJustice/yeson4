@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Vote YES on 4!</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 	<script src="/js/libs/jquery.min.js"></script>
 	<script src="/js/libs/d3.v4.min.js"></script>
 	<script src="/js/libs/d3-geo.v1.min.js"></script>
@@ -12,6 +12,11 @@
 	<script src="/js/libs/d3-axis.v1.min.js"></script>
 	<script src="/js/libs/topojson.js"></script>
 	<script src="/js/libs/queue.min.js"></script>
+	<script src="/js/libs/ScrollMagic.min.js"></script>
+	<script src="/js/libs/TweenMax.min.js"></script>
+	<script src="/js/libs/debug.addIndicators.min.js"></script>
+	<script src="/js/libs/animation.gsap.min.js"></script>
+	<script src="/js/libs/popcorn-complete.min.js"></script>
 	<script src="/js/ant.js"></script>
 	<script src="/js/yesonfour.js"></script>
 	<link rel="stylesheet" href="css/style.css"/>
@@ -20,20 +25,30 @@
 	<audio data-media="audio" id="narration" preload="auto" autobuffer>
 		<source src="narration.mp3" type="audio/mp3"></source>
 	</audio>
-	<div id="start">
-		<div class="header">
-			<h1>Marijuana<br/>Arrests<br/>Ruin<br/>Lives.</h1>
-			<h3>And they happen everyday in Boston.</h3>
-		</div>
-		<div class="msg">
-			<div id="banner" class="box">
-				<div id="weekly" data-chart="lines"></div>
-				
-			</div>
-		</div>
-		<div class="action clear">
-			<div class="c2a" data-click data-parse="#toggle_start,#init">Learn more!</div>
-		</div>
+	<div id="movie" data-movie data-trigger_position="0.7">
+		<div id="movie_1" data-parse="#text_1,#voice_1">hola</div>
+		<div id="movie_2" data-parse="#text_2,#voice_2"></div>
+		<div id="movie_3" data-parse="#text_3,#voice_3"></div>
+		<div id="movie_4" data-parse="#text_4,#voice_4"></div>
+		<div id="movie_5" data-parse="#text_5,#voice_5"></div>
+		<div id="movie_6" data-parse="#text_6,#voice_6,#toggle_map"></div>
+		<div id="movie_7" data-parse="#text_7,#voice_7">como estas</div>
+		<div id="movie_8" data-parse="#text_8,#voice_8"></div>
+		<div id="movie_9" data-parse="#text_9,#voice_9"></div>
+		<div id="movie_10" data-parse="#text_10,#voice_10"></div>
+		<div id="movie_11" data-parse="#text_11,#voice_11"></div>
+		<div id="movie_12" data-parse="#text_12,#voice_12"></div>
+		<div id="movie_13" data-parse="#text_13,#voice_13"></div>
+		<div id="movie_14" data-parse="#text_14,#voice_14"></div>
+		<div id="movie_15" data-parse="#text_15,#voice_15"></div>
+		<div id="movie_16" data-parse="#text_16,#voice_16"></div>
+		<div id="movie_17" data-parse="#text_17,#voice_17"></div>
+		<div id="movie_18" data-parse="#text_18,#voice_18"></div>
+		<div id="movie_19" data-parse="#text_19,#voice_19"></div>
+		<div id="movie_20" data-parse="#text_20,#voice_20"></div>
+		<div id="movie_21" data-parse="#text_21,#voice_21"></div>
+		<div id="movie_22" data-parse="#text_22,#voice_22"></div>
+		<div id="movie_23" data-parse="#text_23,#voice_23"></div>
 	</div>
 	<div id="fixed">
 		<div id="legend">
@@ -47,8 +62,14 @@
 			</div>
 		</div>
 		<div id="map" data-chart="map" data-map_center_lat="42.330128" data-map_center_lon="-71.067549" data-zoom_level="100000"></div>
+		<!-- 
+		<div id="weeks" data-chart="lines"></div>
+		<a id="toggle_map" data-control_element="#map" data-element_toggle></a>
+		<a id="toggle_weeks" data-control_element="#weeks" data-element_toggle></a>
+		-->
 	</div>
-	<div id="movie">
+	<div id="caption"></div>
+		<!-- 
 		<div><a data-click data-parse="#set_white">white</a></div>	
 		<div><a data-click data-parse="#set_black">black</a></div>	
 		<div><a data-click data-parse="#set_poc">poc</a></div>	
@@ -65,7 +86,7 @@
 
 			<a data-click data-parse="#redraw_circles">REDRAW CIRCLES</a>
 		</div>	
-	</div>
+		-->
 	<!-- START CONTROLS -->
 	<!-- Blockgroups -->
 	<a id="zoom_to_boston" data-control_chart="map" data-zoom_to=".blockgroups > path"></a>
@@ -105,6 +126,107 @@
 
 	<a id="init" data-parse=""></a>
 	<a id="toggle_start" data-control_element="#start" data-element_toggle></a>
+	<!-- text -->
+	<a id="text_1" data-control_element="#caption" data-element_text="Marijuana Policing Destroys Lives Every Week in Boston"></a>
+	<a id="text_2" data-control_element="#caption" data-element_text="Even though Massachusetts overwhelmingly passed marijuana decriminalization in 2008, right now an average of 13 people every week are arrested or harassed by the police because of marijuana. "></a>
+	<a id="text_3" data-control_element="#caption" data-element_text="Just one arrest can permanently change one’s life for the worse, causing barriers to employment, schooling, and housing. "></a>
+	<a id="text_4" data-control_element="#caption" data-element_text="The data shows the majority of police interactions and arrests for marijuana offenses occur in neighborhoods where mostly people of color live."></a>
+	<a id="text_5" data-control_element="#caption" data-element_text="Let's explore the data from the 2014 census and the data produced daily by the Boston Police Department."></a>
+	<a id="text_6" data-control_element="#caption" data-element_text="46 percent of Boston’s population is white"></a>
+	<a id="text_7" data-control_element="#caption" data-element_text="25 percent of Boston’s population is Black"></a>
+	<a id="text_8" data-control_element="#caption" data-element_text="And 29 percent of Boston’s population are other people of color"></a>
+	<a id="text_9" data-control_element="#caption" data-element_text="As you can see, the city is racially segregated:"></a>
+	<a id="text_10" data-control_element="#caption" data-element_text="White"></a>
+	<a id="text_11" data-control_element="#caption" data-element_text="People of color"></a>
+	<a id="text_12" data-control_element="#caption" data-element_text="White "></a>
+	<a id="text_13" data-control_element="#caption" data-element_text="People of color"></a>
+	<a id="text_14" data-control_element="#caption" data-element_text="Now let's look at where police harass and arrest people because of marijuana."></a>
+	<a id="text_15" data-control_element="#caption" data-element_text="This is where marijuana incidents happened last week"></a>
+	<a id="text_16" data-control_element="#caption" data-element_text="and this is where marijuana incidents happened since August 2015"></a>
+	<a id="text_17" data-control_element="#caption" data-element_text="Do you notice a pattern?"></a>
+	<a id="text_18" data-control_element="#caption" data-element_text="White"></a>
+	<a id="text_19" data-control_element="#caption" data-element_text="People of color"></a>
+	<a id="text_20" data-control_element="#caption" data-element_text="White "></a>
+	<a id="text_21" data-control_element="#caption" data-element_text="People of color"></a>
+	<a id="text_22" data-control_element="#caption" data-element_text="We can help end racially biased policing of marijuana."></a>
+	<a id="text_23" data-control_element="#caption" data-element_text="*VOTE YES ON 4* — Link to campaign website"></a>
+	<a id="text_24" data-control_element="#caption" data-element_text="*ACLU LOGO*"></a>
 
+	<!-- scenes... they scroll to the right part in the movie and they set the text, etc -->
+	
+	<a id="scene_1" data-control_scroll="movie" data-scroll_to="movie_1"></a>
+	<a id="scene_2" data-control_scroll="movie" data-scroll_to="movie_2"></a>
+	<a id="scene_3" data-control_scroll="movie" data-scroll_to="movie_3"></a>
+	<a id="scene_4" data-control_scroll="movie" data-scroll_to="movie_4"></a>
+	<a id="scene_5" data-control_scroll="movie" data-scroll_to="movie_5"></a>
+	<a id="scene_6" data-control_scroll="movie" data-scroll_to="movie_6"></a>
+	<a id="scene_7" data-control_scroll="movie" data-scroll_to="movie_7"></a>
+	<a id="scene_8" data-control_scroll="movie" data-scroll_to="movie_8"></a>
+	<a id="scene_9" data-control_scroll="movie" data-scroll_to="movie_9"></a>
+	<a id="scene_10" data-control_scroll="movie" data-scroll_to="movie_10"></a>
+	<a id="scene_11" data-control_scroll="movie" data-scroll_to="movie_11"></a>
+	<a id="scene_12" data-control_scroll="movie" data-scroll_to="movie_12"></a>
+	<a id="scene_13" data-control_scroll="movie" data-scroll_to="movie_13"></a>
+	<a id="scene_14" data-control_scroll="movie" data-scroll_to="movie_14"></a>
+	<a id="scene_15" data-control_scroll="movie" data-scroll_to="movie_15"></a>
+	<a id="scene_16" data-control_scroll="movie" data-scroll_to="movie_16"></a>
+	<a id="scene_17" data-control_scroll="movie" data-scroll_to="movie_17"></a>
+	<a id="scene_18" data-control_scroll="movie" data-scroll_to="movie_18"></a>
+	<a id="scene_19" data-control_scroll="movie" data-scroll_to="movie_19"></a>
+	<a id="scene_20" data-control_scroll="movie" data-scroll_to="movie_20"></a>
+	<a id="scene_21" data-control_scroll="movie" data-scroll_to="movie_21"></a>
+	<a id="scene_22" data-control_scroll="movie" data-scroll_to="movie_22"></a>
+	<a id="scene_23" data-control_scroll="movie" data-scroll_to="movie_23"></a>
+	<!-- triggers -->
+	<!-- <a id="trigger_1" data-subscribe_media="narration" data-subscribe_time="0" data-parse="#scene_1"></a> -->
+	<a id="trigger_2" data-subscribe_media="narration" data-subscribe_time="4.5" data-parse="#scene_2"></a>
+	<a id="trigger_3" data-subscribe_media="narration" data-subscribe_time="19.5" data-parse="#scene_3"></a>
+	<a id="trigger_4" data-subscribe_media="narration" data-subscribe_time="28.5" data-parse="#scene_4"></a>
+	<a id="trigger_5" data-subscribe_media="narration" data-subscribe_time="38.5" data-parse="#scene_5"></a>
+	<a id="trigger_6" data-subscribe_media="narration" data-subscribe_time="45.5" data-parse="#scene_6"></a>
+	<a id="trigger_7" data-subscribe_media="narration" data-subscribe_time="49.5" data-parse="#scene_7"></a>
+	<a id="trigger_8" data-subscribe_media="narration" data-subscribe_time="53.5" data-parse="#scene_8"></a>
+	<a id="trigger_9" data-subscribe_media="narration" data-subscribe_time="58.5" data-parse="#scene_9"></a>
+	<a id="trigger_10" data-subscribe_media="narration" data-subscribe_time="62.5" data-parse="#scene_10"></a>
+	<a id="trigger_11" data-subscribe_media="narration" data-subscribe_time="64.5" data-parse="#scene_11"></a>
+	<a id="trigger_12" data-subscribe_media="narration" data-subscribe_time="66.5" data-parse="#scene_12"></a>
+	<a id="trigger_13" data-subscribe_media="narration" data-subscribe_time="68.5" data-parse="#scene_13"></a>
+	<a id="trigger_14" data-subscribe_media="narration" data-subscribe_time="70.5" data-parse="#scene_14"></a>
+	<a id="trigger_15" data-subscribe_media="narration" data-subscribe_time="75.5" data-parse="#scene_15"></a>
+	<a id="trigger_16" data-subscribe_media="narration" data-subscribe_time="80.5" data-parse="#scene_16"></a>
+	<a id="trigger_17" data-subscribe_media="narration" data-subscribe_time="86.6" data-parse="#scene_17"></a>
+	<a id="trigger_18" data-subscribe_media="narration" data-subscribe_time="89.5" data-parse="#scene_18"></a>
+	<a id="trigger_19" data-subscribe_media="narration" data-subscribe_time="91.5" data-parse="#scene_19"></a>
+	<a id="trigger_20" data-subscribe_media="narration" data-subscribe_time="93.5" data-parse="#scene_20"></a>
+	<a id="trigger_21" data-subscribe_media="narration" data-subscribe_time="95.5" data-parse="#scene_21"></a>
+	<a id="trigger_22" data-subscribe_media="narration" data-subscribe_time="97.5" data-parse="#scene_22"></a>
+	<a id="trigger_23" data-subscribe_media="narration" data-subscribe_time="101.5" data-parse="#scene_23"></a>
+
+	<!-- voices (#recover_status is the one responsible for playing (or not) the audio -->
+	<a id="voice_1" data-control_media="narration" data-media_time="0" data-parse="#recover_status"></a>
+	<a id="voice_2" data-control_media="narration" data-media_time="5" data-parse="#recover_status"></a>
+	<a id="voice_3" data-control_media="narration" data-media_time="20" data-parse="#recover_status"></a>
+	<a id="voice_4" data-control_media="narration" data-media_time="29" data-parse="#recover_status"></a>
+	<a id="voice_5" data-control_media="narration" data-media_time="39" data-parse="#recover_status"></a>
+	<a id="voice_6" data-control_media="narration" data-media_time="46" data-parse="#recover_status"></a>
+	<a id="voice_7" data-control_media="narration" data-media_time="50" data-parse="#recover_status"></a>
+	<a id="voice_8" data-control_media="narration" data-media_time="54" data-parse="#recover_status"></a>
+	<a id="voice_9" data-control_media="narration" data-media_time="59" data-parse="#recover_status"></a>
+	<a id="voice_10" data-control_media="narration" data-media_time="63" data-parse="#recover_status"></a>
+	<a id="voice_11" data-control_media="narration" data-media_time="65" data-parse="#recover_status"></a>
+	<a id="voice_12" data-control_media="narration" data-media_time="67" data-parse="#recover_status"></a>
+	<a id="voice_13" data-control_media="narration" data-media_time="69" data-parse="#recover_status"></a>
+	<a id="voice_14" data-control_media="narration" data-media_time="71" data-parse="#recover_status"></a>
+	<a id="voice_15" data-control_media="narration" data-media_time="76" data-parse="#recover_status"></a>
+	<a id="voice_16" data-control_media="narration" data-media_time="81" data-parse="#recover_status"></a>
+	<a id="voice_17" data-control_media="narration" data-media_time="87" data-parse="#recover_status"></a>
+	<a id="voice_18" data-control_media="narration" data-media_time="90" data-parse="#recover_status"></a>
+	<a id="voice_19" data-control_media="narration" data-media_time="92" data-parse="#recover_status"></a>
+	<a id="voice_20" data-control_media="narration" data-media_time="94" data-parse="#recover_status"></a>
+	<a id="voice_21" data-control_media="narration" data-media_time="96" data-parse="#recover_status"></a>
+	<a id="voice_22" data-control_media="narration" data-media_time="98" data-parse="#recover_status"></a>
+	<a id="voice_23" data-control_media="narration" data-media_time="102" data-parse="#recover_status"></a>
+
+	<a id="recover_status" data-control_media="narration"></a>
 </body>
 </html>
