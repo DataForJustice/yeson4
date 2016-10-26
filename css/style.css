@@ -34,6 +34,13 @@ h1, h2, h3, h4, h5, h6 {
 		height: 60%;
 		width: 100%;
 	}
+	#caption { 
+		position: fixed;
+		top: 60%;
+		left: 0;
+		width: 100%;
+		height: 40%;
+	}
 }
 @media all and (orientation: landscape) {
 	#start {
@@ -62,6 +69,20 @@ h1, h2, h3, h4, h5, h6 {
 		height: 100%;
 		width: 50%;
 	}
+	#caption {
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 50%;
+	}
+}
+#movie {
+}
+#movie > div { 
+	position: relative;
+	height: 70vh;
+	width: 0px;
 }
 #legend { 
 	position: absolute;
