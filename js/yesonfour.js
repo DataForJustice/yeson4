@@ -1,6 +1,14 @@
 $(document).ready (function () { 
 	var cnf = {
 		prequantifiers: {
+			week: function () {
+				return {
+					"nest": new Nestify (this.data.week, ["grid"], this.data.week.columns).data,
+					"scale": d3.scaleLinear ()
+						.domain ([0, 1])
+						.range ([0,5])
+				}
+			},
 			incidents: function (args) { 
 				var nest = new Nestify (this.data.incidents, ["grid", "code"], this.data.incidents.columns).data;
 
@@ -21,8 +29,8 @@ $(document).ready (function () {
 					nest: nest,
 					scale: d3.scalePow ()
 						.exponent (.4)
-						.domain (nest.extent (sum (["01845", "01848"], args)))
-						.range ([.5, 10])
+						.domain (nest.meanmax (sum (["01845", "01848"], args)))
+						.range ([2, 10])
 						.clamp (true)
 				}
 			},
@@ -40,6 +48,12 @@ $(document).ready (function () {
 			maps: {
 				redraw: function () { 
 					return {"r": "10" }
+				},
+				week: function (grid, args, prop) {
+					var id = grid.properties.id, nest = prop.nest;
+					if (nest [id]) {
+						return {"r": prop.scale (parseInt (nest [id].count.value)) }
+					}
 				},
 				incidents: function (grid, args, prop) { 
 					var id = grid.properties.id, nest = prop.nest;

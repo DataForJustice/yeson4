@@ -40,8 +40,8 @@
 		<div id="movie_12" data-parse="#text_12,#voice_12,#set_white"></div>
 		<div id="movie_13" data-parse="#text_13,#voice_13,#set_poc"></div>
 		<div id="movie_14" data-parse="#text_14,#voice_14,#set_seg"></div>
-		<div id="movie_15" data-parse="#text_15,#voice_15,#toggle_grid"></div>
-		<div id="movie_16" data-parse="#text_16,#voice_16"></div>
+		<div id="movie_15" data-parse="#text_15,#voice_15,#quantify_week"></div>
+		<div id="movie_16" data-parse="#text_16,#voice_16,#quantify_incidents"></div>
 		<div id="movie_17" data-parse="#text_17,#voice_17,#set_seg"></div>
 		<div id="movie_18" data-parse="#text_18,#voice_18,#set_white"></div>
 		<div id="movie_19" data-parse="#text_19,#voice_19,#set_poc"></div>
@@ -62,38 +62,20 @@
 			</div>
 		</div>
 		<div class="chart" id="map" data-chart="map" data-map_center_lat="42.330128" data-map_center_lon="-71.067549" data-zoom_level="100000"></div>
-		<!-- 
-		<div id="weeks" data-chart="lines"></div>
-		<a id="toggle_map" data-control_element="#map" data-element_toggle></a>
-		<a id="toggle_weeks" data-control_element="#weeks" data-element_toggle></a>
-		-->
+		<div id="controls_big" class="narration_control_ui" data-click data-parse_sequence="#start_narration,#update_narration_ui"></div>
 	</div>
 	<div id="top">
-		<div id="aclum"></div>
-		<div id="yesonfour"></div>
+		<div id="aclum"><a href="http://aclum.org/"><img src="img/logo.png"/></a></div>
+		<div id="yesonfour"><a href="http://regulatemassachusetts.org"><img src="img/yeson4.png"/></a></div>
 	</div>
 	<div id="caption"></div>
+	<div id="controls" class="narration_control_ui" style="display:none;">
+		<div class="narration_control_ui"></div>	
+		<div class="narration_control_ui" style="display: none" data-click data-parse="#stop_narration,#update_narration_ui"><img src="img/pause.svg" width="40" height="40"></div>
+	</div>
 	<!-- caption actions -->
 	<a id="big_caption" data-control_element="#caption" data-element_add_class="big" data-debug="hola"></a>
 	<a id="normal_caption" data-control_element="#caption" data-element_remove_class="big"></a>
-		<!-- 
-		<div><a data-click data-parse="#set_white">white</a></div>	
-		<div><a data-click data-parse="#set_black">black</a></div>	
-		<div><a data-click data-parse="#set_poc">poc</a></div>	
-		<div><a data-click data-parse="#set_opoc">opoc</a></div>	
-		<div><a data-click data-parse="#quantify_incidents">all poss class d</a></div>	
-		<div>
-			<a data-click data-parse="#quantify_incidents_a">poss class d only</a>
-			[<a data-click data-parse="#quantify_incidents_a_abs">absolute</a>]
-		</div>	
-		<div>
-			<a data-click data-parse="#quantify_incidents_b">poss class d only intent mfr, etc</a>
-			[<a data-click data-parse="#quantify_incidents_b_abs">absolute</a>]
-			<br>
-
-			<a data-click data-parse="#redraw_circles">REDRAW CIRCLES</a>
-		</div>	
-		-->
 	<!-- START CONTROLS -->
 	<!-- Blockgroups -->
 	<a id="empty_blockgroups" data-control_element=".blockgroups" data-element_add_class="default"></a>
@@ -105,14 +87,15 @@
 	
 	<!-- Grid -->
 	<a id="redraw_grid" data-control_chart="map" data-add_layer="grid" data-layer_key="stdin" data-parse="" data-layer_points></a>
-	<a id="download_grid" data-download="data/grid.json" data-download_id="grid" data-type="json" data-download_parse_sequence="#redraw_grid,#download_incidents"></a>
+	<a id="download_grid" data-download="data/grid.json" data-download_id="grid" data-type="json" data-download_parse_sequence="#redraw_grid,#download_incidents,#download_week"></a>
 	<a id="hide_grid" data-control_element=".grid" data-element_hide></a>
 	<a id="show_grid" data-control_element=".grid" data-element_show></a>
 	<a id="toggle_grid" data-control_element=".grid" data-element_toggle></a>
 
 	<!-- Incidents -->
 	<a id="quantify_incidents" data-control_chart="map" data-quantify="grid" data-quantifier="incidents"></a>
-	<a id="download_incidents" data-download="data/incidents.csv" data-download_id="incidents" data-type="csv" data-download_parse_sequence="#quantify_incidents"></a>
+	<a id="download_incidents" data-download="data/incidents.csv" data-download_id="incidents" data-type="csv"></a>
+	<a id="download_week" data-download="data/incidents.week.csv" data-download_id="week" data-type="csv"></a>
 
 	<!-- viz -->
 	<a id="reset_blockgroups" data-control_element=".blockgroup" data-element_remove_class="white black poc opoc seg" data-parse="#reset_blockgroups_layer"></a>
@@ -125,8 +108,18 @@
 
 	<!-- poss class d -->
 
+	<a id="quantify_week" data-control_chart="map" data-quantify="grid" data-quantifier="week"></a>
+
 	<a id="quantify_incidents_a" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args='{"incidents": ["01845"]}'></a>
 	<a id="quantify_incidents_a_abs" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args='{"incidents": ["01845"], "absolute": true}'></a>
+
+	<!-- narration controls -->
+	<a id="recover_status" data-parse=".current_status"></a>
+	<a id="update_narration_ui" data-control_element=".narration_control_ui" data-element_toggle></a>
+	<a id="reset_narration_status" data-control_element=".narration_control" data-element_remove_class="current_status"></a>
+	<a id="start_current_status" data-control_element="#start_narration" data-element_add_class="current_status"></a>
+	<a id="start_narration" class="narration_control" data-control data-control_media="narration" data-media_play data-parse="#reset_narration_status,#start_current_status"></a>
+	<a id="stop_narration" class="narration_control" data-control data-control_media="narration" data-media_pause data-parse="#reset_narration_status"></a>
 
 	<!-- poss class d intent -->
 
@@ -145,10 +138,10 @@
 	<a id="text_3" data-control_element="#caption" data-element_text="Just one arrest can permanently change one’s life for the worse, causing barriers to employment, schooling, and housing. "></a>
 	<a id="text_4" data-control_element="#caption" data-element_text="The data shows the majority of police interactions and arrests for marijuana offenses occur in neighborhoods where mostly people of color live."></a>
 	<a id="text_5" data-control_element="#caption" data-element_text="Let's explore the data from the 2014 census and the data produced daily by the Boston Police Department."></a>
-	<a id="text_6" data-control_element="#caption" data-element_text="46 percent of Boston’s population is white"></a>
-	<a id="text_7" data-control_element="#caption" data-element_text="25 percent of Boston’s population is Black"></a>
-	<a id="text_8" data-control_element="#caption" data-element_text="And 29 percent of Boston’s population are other people of color"></a>
-	<a id="text_9" data-control_element="#caption" data-element_text="As you can see, the city is racially segregated:"></a>
+	<a id="text_6" data-control_element="#caption" data-element_text="46% of Boston’s population is white"></a>
+	<a id="text_7" data-control_element="#caption" data-element_text="25% of Boston’s population is Black"></a>
+	<a id="text_8" data-control_element="#caption" data-element_text="And 29% of Boston’s population are other people of color"></a>
+	<a id="text_9" data-control_element="#caption" data-element_text="As you can see, the city is racially segregated"></a>
 	<a id="text_10" data-control_element="#caption" data-element_text="White"></a>
 	<a id="text_11" data-control_element="#caption" data-element_text="People of color"></a>
 	<a id="text_12" data-control_element="#caption" data-element_text="White "></a>
@@ -161,9 +154,9 @@
 	<a id="text_19" data-control_element="#caption" data-element_text="People of color"></a>
 	<a id="text_20" data-control_element="#caption" data-element_text="White "></a>
 	<a id="text_21" data-control_element="#caption" data-element_text="People of color"></a>
-	<a id="text_22" data-control_element="#caption" data-element_text="We can help end racially biased policing of marijuana."></a>
-	<a id="text_23" data-control_element="#caption" data-element_text="*VOTE YES ON 4* — Link to campaign website"></a>
-	<a id="text_24" data-control_element="#caption" data-element_text="*ACLU LOGO*"></a>
+	<a id="text_22" data-control_element="#caption" data-element_text="We can help end racially biased policing of marijuana!"></a>
+	<a id="text_23" data-control_element="#caption" data-element_text="VOTE YES ON 4"></a>
+	<a id="text_24" data-control_element="#caption" data-element_text=""></a>
 
 	<!-- scenes... they scroll to the right part in the movie and they set the text, etc -->
 	
@@ -240,6 +233,5 @@
 	<a id="voice_22" data-control_media="narration" data-media_time="98" data-parse="#recover_status"></a>
 	<a id="voice_23" data-control_media="narration" data-media_time="102" data-parse="#recover_status"></a>
 
-	<a id="recover_status" data-control_media="narration"></a>
 </body>
 </html>
