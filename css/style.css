@@ -160,7 +160,7 @@ h1, h2, h3, h4, h5, h6 {
 	width: 40%;
 	background-color: red;
 	background: url('../img/play.svg') no-repeat;
-	background-size: auto 100%;
+	background-size: auto 80%;
 }
 #start {
 	z-index: 1;
