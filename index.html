@@ -80,17 +80,17 @@
 	<!-- Blockgroups -->
 	<a id="empty_blockgroups" data-control_element=".blockgroups" data-element_add_class="default"></a>
 	<a id="zoom_to_boston" data-control_chart="map" data-zoom_to=".blockgroups > path"></a>
-	<a id="redraw_blockgroups" data-control_chart="map" data-add_layer="blockgroups" data-layer_key="stdin" data-parse="#zoom_to_boston"></a>
+	<a id="blockgroups_to_bottom" data-control_element=".blockgroups" data-element_move_to="first"></a>
+	<a id="redraw_blockgroups" data-control_chart="map" data-add_layer="blockgroups" data-layer_key="stdin" data-parse="#zoom_to_boston,#blockgroups_to_bottom"></a>
 	<a id="download_blockgroups" data-onload data-download="data/blockgroups.json" data-download_id="blockgroups" data-type="json" data-download_parse_sequence="#redraw_blockgroups,#download_blockgroups_race,#download_grid" data-debug="download_blockgroups"></a>	
 	<a id="download_blockgroups_race" data-download="data/blockgroups.race.csv" data-download_id="blockgroups_race" data-download_parse_sequence="#quantify_blockgroups"></a>
 	<a id="quantify_blockgroups" data-control_chart="map" data-quantify="blockgroups" data-quantifier="blockgroups"></a>
 	
 	<!-- Grid -->
-	<a id="redraw_grid" data-control_chart="map" data-add_layer="grid" data-layer_key="stdin" data-parse="" data-layer_points></a>
-	<a id="download_grid" data-download="data/grid.json" data-download_id="grid" data-type="json" data-download_parse_sequence="#redraw_grid,#download_incidents,#download_week"></a>
+	<a id="redraw_grid" data-control_chart="map" data-add_layer="grid" data-layer_key="stdin" data-layer_points data-parse="#grid_to_top"></a>
+	<a id="download_grid" data-onload data-download="data/grid.json" data-download_id="grid" data-type="json" data-download_parse_sequence="#redraw_grid,#download_incidents,#download_week"></a>
 	<a id="hide_grid" data-control_element=".grid" data-element_hide></a>
 	<a id="show_grid" data-control_element=".grid" data-element_show></a>
-	<a id="toggle_grid" data-control_element=".grid" data-element_toggle></a>
 
 	<!-- Incidents -->
 	<a id="quantify_incidents" data-control_chart="map" data-quantify="grid" data-quantifier="incidents"></a>
