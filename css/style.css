@@ -8,6 +8,13 @@ h1, h2, h3, h4, h5, h6 {
 	margin: 0;
 	padding: 0;
 }
+#debug {
+	background-color: red;
+	width: 35px;
+	position: absolute;
+	top: 90%;
+	height: 10px;
+}
 #top {
 	position: fixed;
 	top: 0;
