@@ -27,7 +27,7 @@
 	</audio>
 	<div id="movie" data-movie data-trigger_position="0.7">
 		<div id="movie_1" data-parse="#text_1,#voice_1,#big_caption,#empty_blockgroups"></div>
-		<div id="movie_2" data-parse="#text_2,#voice_2,#normal_caption"></div>
+		<div id="movie_2" data-parse="#text_2,#voice_2,#empty_blockgroups,#normal_caption"></div>
 		<div id="movie_3" data-parse="#text_3,#voice_3"></div>
 		<div id="movie_4" data-parse="#text_4,#voice_4"></div>
 		<div id="movie_5" data-parse="#text_5,#voice_5,#empty_blockgroups"></div>
@@ -93,8 +93,10 @@
 	<a id="show_grid" data-control_element=".grid" data-element_show></a>
 
 	<!-- Incidents -->
+	<a id="quantify_week" data-control_chart="map" data-quantify="grid" data-quantifier="week"></a>
 	<a id="quantify_incidents" data-control_chart="map" data-quantify="grid" data-quantifier="incidents"></a>
 	<a id="download_week" data-download="data/incidents.week.csv" data-download_id="week" data-type="csv"></a>
+	<a id="download_incidents" data-download="data/incidents.csv" data-download_id="incidents" data-type="csv"></a>
 
 	<!-- viz -->
 	<a id="reset_blockgroups" data-control_element=".blockgroup" data-element_remove_class="white black poc opoc seg" data-parse="#reset_blockgroups_layer"></a>
@@ -107,11 +109,6 @@
 
 	<!-- poss class d -->
 
-	<a id="quantify_week" data-control_chart="map" data-quantify="grid" data-quantifier="week"></a>
-
-	<a id="quantify_incidents_a" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args='{"incidents": ["01845"]}'></a>
-	<a id="quantify_incidents_a_abs" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args='{"incidents": ["01845"], "absolute": true}'></a>
-
 	<!-- narration controls -->
 	<a id="recover_status" data-parse=".current_status"></a>
 	<a id="update_narration_ui" data-control_element=".narration_control_ui" data-element_toggle></a>
@@ -122,9 +119,6 @@
 
 	<!-- poss class d intent -->
 
-	<a id="quantify_incidents_b" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args='{"incidents": ["01848"]}'></a>
-	<a id="quantify_incidents_b_abs" data-control_chart="map" data-quantify="grid" data-quantifier="incidents" data-quantifier_args='{"incidents": ["01848"], "absolute": true}'></a>
-	
 	<a id="redraw_circles" data-control_chart="map" data-quantify="grid" data-quantifier="redraw"></a>
 
 	<a id="show_legend_grid" data-control_element="#legend_grid" data-element_show></a>
