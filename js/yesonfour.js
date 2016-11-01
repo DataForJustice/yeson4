@@ -54,6 +54,7 @@ $(document).ready (function () {
 					if (nest [id]) {
 						return {"r": prop.scale (parseInt (nest [id].count.value)) }
 					}
+					return {"r": 0}
 				},
 				incidents: function (grid, args, prop) { 
 					var id = grid.properties.id, nest = prop.nest;
@@ -72,6 +73,7 @@ $(document).ready (function () {
 						return {"r": prop.scale (val), "data": data }
 
 					}
+					return {"r": 0}
 				},
 				blockgroups: function (blockgroup, args, prop) {
 					var id = blockgroup.properties.id, vars = ["w", "b", "o"], className = "blockgroup ";
